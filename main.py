@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 
-   
+
 
 root = Tk()
 root.title("WeTalk")
@@ -21,7 +21,7 @@ typein.grid(column=1,row=3)
 typein.insert("1.0","Please type here.")
 input=typein.get("1.0")
 
-ttk.Button(mainframe, text="Send").grid(column=2, row=3, sticky=W)
+ttk.Button(mainframe, text="Send").grid(column=2, row=3)
 
 for child in mainframe.winfo_children(): 
     child.grid_configure(padx=10, pady=5)

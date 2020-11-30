@@ -1,29 +1,30 @@
 from tkinter import *
-from tkinter import ttk
 
-
-
-root = Tk()
+root=Tk()
 root.title("WeTalk")
 
-mainframe = ttk.Frame(root,padding="5")
+mainframe=Frame(root)
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
-ttk.Label(mainframe, text="name").grid(column=1, row=1, sticky=W)
+name=Label(mainframe, text="name")
+name.grid(column=0,row=0,padx=5,pady=5,sticky=W)
 
-display=Text(mainframe,height=50,width=100)
-display.grid(column=1,row=2)
+display=Text(mainframe,height=35)
+display.grid(column=0,row=1,padx=5,pady=5,sticky=(N, W, E, S))
 
-typein=Text(mainframe,height=10,width=100)
-typein.grid(column=1,row=3)
+typein=Text(mainframe,height=15)
+typein.grid(column=0,row=2,padx=5,pady=20,sticky=(N, W, E, S))
 typein.insert("1.0","Please type here.")
-input=typein.get("1.0")
+#input=typein.get("1.0","end")
+#typein.delete("1.0","end")
 
-ttk.Button(mainframe, text="Send").grid(column=2, row=3)
+mainframe.columnconfigure(0,weight=1)
+mainframe.rowconfigure(1,weight=1)
 
-for child in mainframe.winfo_children(): 
-    child.grid_configure(padx=10, pady=5)
+send=Button(mainframe, text="Send",padx=10)
+send.grid(column=1,row=2,padx=10,sticky=W)
 
 root.mainloop()

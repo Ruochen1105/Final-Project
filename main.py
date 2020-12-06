@@ -28,4 +28,4 @@ mainframe.rowconfigure(1,weight=1)
 send=Button(mainframe, text="Send",padx=10)
 send.grid(column=1,row=2,padx=10,sticky=W)
 
-root.update()
+root.mainloop()

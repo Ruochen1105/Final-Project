@@ -1,31 +1,41 @@
 from tkinter import *
-import time
 
-root=Tk()
-root.title("ICS chat")
+class gui():
+    def __init__(self):
+        self.root=Tk()
 
-mainframe=Frame(root)
-mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+        self.root.title("ICS chat")
 
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
+        self.mainframe=Frame(self.root)
+        self.mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+        self.root.columnconfigure(0, weight=1)
+        self.root.rowconfigure(0, weight=1)
 
-name=Label(mainframe, text="name")
-name.grid(column=0,row=0,padx=5,pady=5,sticky=W)
+        self.name=Label(self.mainframe, text="name")
+        self.name.grid(column=0,row=0,padx=5,pady=5,sticky=W)
 
-display=Text(mainframe,height=35)
-display.grid(column=0,row=1,padx=5,pady=5,sticky=(N, W, E, S))
+        self.display=Text(self.mainframe,height=35)
+        self.display.grid(column=0,row=1,padx=5,pady=5,sticky=(N, W, E, S))
 
-typein=Text(mainframe,height=15)
-typein.grid(column=0,row=2,padx=5,pady=20,sticky=(N, W, E, S))
-typein.insert("1.0","Please type here.")
+        self.typein=Text(self.mainframe,height=15)
+        self.typein.grid(column=0,row=2,padx=5,pady=20,sticky=(N, W, E, S))
+        self.typein.insert("1.0","Please type here.")
+
 #input=typein.get("1.0","end")
 #typein.delete("1.0","end")
 
-mainframe.columnconfigure(0,weight=1)
-mainframe.rowconfigure(1,weight=1)
+        self.mainframe.columnconfigure(0,weight=1)
+        self.mainframe.rowconfigure(1,weight=1)
 
-send=Button(mainframe, text="Send",padx=10)
-send.grid(column=1,row=2,padx=10,sticky=W)
+        self.send=Button(self.mainframe, text="Send",padx=10)
+        self.send.grid(column=1,row=2,padx=10,sticky=W)
 
-root.mainloop()
+    def mainloop(self):
+        self.root.mainloop()
+
+def main():
+    root=gui()
+    root.mainloop()
+
+if __name__=="__main__":
+    main()

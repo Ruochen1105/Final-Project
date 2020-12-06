@@ -1,1 +1,1 @@
-Nothing here.
+TODO: Implement threading in chat_client_class.py to execute gui and chat client concurrently.

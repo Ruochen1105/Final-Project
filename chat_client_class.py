@@ -35,6 +35,8 @@ class Client:
         gui_thread=threading.Thread(target=self.gui.mainloop)
         reading_thread.start()
         gui_thread.start()
+        reading_thread.join()
+        gui_thread.join()
 
     def shutdown_chat(self):
         return

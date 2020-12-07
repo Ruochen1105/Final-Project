@@ -5,7 +5,6 @@ import sys
 import json
 from chat_utils import *
 import client_state_machine as csm
-from main import gui
 import threading
 
 class Client:
@@ -17,7 +16,6 @@ class Client:
         self.local_msg = ''
         self.peer_msg = ''
         self.args = args
-        self.gui=gui()
 
     def quit(self):
         self.socket.shutdown(socket.SHUT_RDWR)
@@ -32,11 +30,7 @@ class Client:
         self.socket.connect(svr)
         self.sm = csm.ClientSM(self.socket)
         reading_thread = threading.Thread(target=self.read_input)
-        gui_thread=threading.Thread(target=self.gui.mainloop)
         reading_thread.start()
-        gui_thread.start()
-        reading_thread.join()
-        gui_thread.join()
 
     def shutdown_chat(self):
         return

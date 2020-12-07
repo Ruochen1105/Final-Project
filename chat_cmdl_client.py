@@ -1,4 +1,5 @@
-
+import threading
+from main import gui
 from chat_client_class import *
 
 def main():
@@ -7,7 +8,12 @@ def main():
     parser.add_argument('-d', type=str, default=None, help='server IP addr')
     args = parser.parse_args()
 
+    
     client = Client(args)
-    client.run_chat()
+
+    client_thread=threading.Thread(target=client.run_chat)
+    client_thread.start()
+    client_gui=gui()
+    client_gui.mainloop()
 
 main()

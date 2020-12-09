@@ -1,6 +1,7 @@
 from tkinter import *
 import queue
 import threading
+import time
 
 class gui():
     def __init__(self,q=None):
@@ -38,16 +39,19 @@ class gui():
         self.send=Button(self.mainframe, text="Send",command=self.get_info,padx=10)
         self.send.grid(column=2,row=2,padx=10,sticky=W)
 
+        self.root.bind("<Return>",self.get_info)
+
     def mainloop(self):
         self.display_thread=threading.Thread(target=self.display_info)
         self.display_thread.start()
         self.root.mainloop()
 
-    def get_info(self):
+    def get_info(self,event=None):
         input=self.typein.get("1.0","end")
         self.typein.delete("1.0","end")
         self.qo.put(input.strip())
-        self.display.insert("end","[You]>>> "+input.strip()+"\n\n")
+        ctime = time.strftime('%d.%m.%y,%H:%M', time.localtime())
+        self.display.insert("end",ctime+" [You]>>> "+input.strip()+"\n\n")
 
     def display_info(self):
         while True:

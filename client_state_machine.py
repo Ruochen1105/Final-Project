@@ -1,6 +1,7 @@
 
 from chat_utils import *
 import json
+import time
 
 class ClientSM:
     def __init__(self, s):
@@ -64,6 +65,10 @@ class ClientSM:
                     self.out_msg += 'See you next time!\n'
                     self.state = S_OFFLINE
 
+                elif my_msg == "clear":
+                    mysend(self.s,json.dumps({"action":"clear"}))
+                    self.out_msg+="Your chat history is cleared."
+                
                 elif my_msg == 'time':
                     mysend(self.s, json.dumps({"action":"time"}))
                     time_in = json.loads(myrecv(self.s))["results"]
@@ -143,7 +148,8 @@ class ClientSM:
                     self.out_msg += peer_msg["message"]
                     self.state = S_LOGGEDIN
                 else:
-                    self.out_msg += peer_msg["from"] + peer_msg["message"]
+                    ctime = time.strftime('%d.%m.%y,%H:%M', time.localtime())
+                    self.out_msg += ctime+" "+peer_msg["from"] + peer_msg["message"]
                 # ----------end of your code----#
             if self.state == S_LOGGEDIN:
                 # Display the menu again

@@ -141,6 +141,10 @@ class Server:
 
                     # ---- end of your code --- #
 
+            elif msg["action"]=="clear":
+                name = self.logged_sock2name[from_sock]
+                self.indices[name]=indexer.Index(name)
+
 # ==============================================================================
 # the "from" guy has had enough (talking to "to")!
 # ==============================================================================

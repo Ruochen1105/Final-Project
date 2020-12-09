@@ -47,7 +47,7 @@ class gui():
         input=self.typein.get("1.0","end")
         self.typein.delete("1.0","end")
         self.qo.put(input.strip())
-        self.qi.put(">>> "+input.strip())
+        self.display.insert("end","[You]>>> "+input.strip()+"\n\n")
 
     def display_info(self):
         while True:

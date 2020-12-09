@@ -1,1 +1,3 @@
-TODO: use queue to pass messages between threads
+TODO: time stamp
+TODO: font size change
+TODO: theme change

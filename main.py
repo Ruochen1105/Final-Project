@@ -29,7 +29,7 @@ class gui():
         self.mainframe.rowconfigure(1,weight=1)
 
         self.send=Button(self.mainframe, text="Send",command=self.get_info,padx=10)
-        self.send.grid(column=1,row=2,padx=10,sticky=W)
+        self.send.grid(column=2,row=2,padx=10,sticky=W)
 
     def mainloop(self):
         self.display_thread=threading.Thread(target=self.display_info)
@@ -40,11 +40,12 @@ class gui():
         input=self.typein.get("1.0","end")
         self.typein.delete("1.0","end")
         self.qo.put(input.strip())
+        self.qi.put(">>> "+input.strip())
 
     def display_info(self):
         while True:
             self.display.insert("end",self.qi.get())
-            self.display.insert("end","\n")
+            self.display.insert("end","\n\n")
 
     def set_qi(self,q):
         self.qi=q

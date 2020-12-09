@@ -115,7 +115,6 @@ class ClientSM:
 
                 if peer_msg["action"] == "connect":
                     # ----------your code here------#
-                    print(peer_msg)
                     self.peer = peer_msg["from"]
                     self.out_msg += 'Request from ' + self.peer + '\n'
                     self.out_msg += 'You are connected with ' + self.peer

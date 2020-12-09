@@ -6,9 +6,10 @@ import json
 from chat_utils import *
 import client_state_machine as csm
 import threading
+import queue
 
 class Client:
-    def __init__(self, args):
+    def __init__(self, args, q):
         self.peer = ''
         self.console_input = []
         self.state = S_OFFLINE
@@ -16,6 +17,8 @@ class Client:
         self.local_msg = ''
         self.peer_msg = ''
         self.args = args
+        self.qi=q
+        self.qo=queue.Queue()
 
     def quit(self):
         self.socket.shutdown(socket.SHUT_RDWR)
@@ -54,7 +57,7 @@ class Client:
 
     def output(self):
         if len(self.system_msg) > 0:
-            print(self.system_msg)
+            self.qo.put(self.system_msg)
             self.system_msg = ''
 
     def login(self):
@@ -79,7 +82,7 @@ class Client:
 
     def read_input(self):
         while True:
-            text = sys.stdin.readline()[:-1]
+            text = self.qi.get()
             self.console_input.append(text) # no need for lock, append is thread safe
 
     def print_instructions(self):

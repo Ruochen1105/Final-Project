@@ -1,7 +1,11 @@
 from tkinter import *
+import queue
+import threading
 
 class gui():
-    def __init__(self):
+    def __init__(self,q=None):
+        self.qo=queue.Queue(maxsize=1)
+        self.qi=q
         self.root=Tk()
 
         self.root.title("ICS chat")
@@ -21,17 +25,30 @@ class gui():
         self.typein.grid(column=0,row=2,padx=5,pady=20,sticky=(N, W, E, S))
         self.typein.insert("1.0","Please type here.")
 
-#input=typein.get("1.0","end")
-#typein.delete("1.0","end")
-
         self.mainframe.columnconfigure(0,weight=1)
         self.mainframe.rowconfigure(1,weight=1)
 
-        self.send=Button(self.mainframe, text="Send",padx=10)
+        self.send=Button(self.mainframe, text="Send",command=self.get_info,padx=10)
         self.send.grid(column=1,row=2,padx=10,sticky=W)
 
     def mainloop(self):
+        self.display_thread=threading.Thread(target=self.display_info)
+        self.display_thread.start()
         self.root.mainloop()
+
+    def get_info(self):
+        input=self.typein.get("1.0","end")
+        self.typein.delete("1.0","end")
+        self.qo.put(input.strip())
+
+    def display_info(self):
+        while True:
+            self.display.insert("end",self.qi.get())
+            self.display.insert("end","\n")
+
+    def set_qi(self,q):
+        self.qi=q
+
 
 def main():
     root=gui()

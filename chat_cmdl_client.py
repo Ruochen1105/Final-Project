@@ -1,5 +1,5 @@
 import threading
-from main import gui
+from gui import gui
 from chat_client_class import *
 
 def main():

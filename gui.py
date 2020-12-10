@@ -37,12 +37,12 @@ class gui():
         self.emoji=LabelFrame(mainframe,text="emoji",relief="sunken")
         self.emoji.grid(column=2,row=0,sticky=W)
         self.edic=dict()
-        for i in range(1,8):
+        for i in range(1,9):
             image=Image.open(str(i)+".jpg")
             image=image.resize((25,25),Image.ANTIALIAS)
             emoji=ImageTk.PhotoImage(image)
             self.edic[i]=emoji
-            Button(self.emoji,image=emoji,command=partial(self.type_in_emoji,i)).grid(column=(i+1)%2,row=i//2)
+            Button(self.emoji,image=emoji,command=partial(self.type_in_emoji,i)).grid(column=(i+1)%2,row=(i-1)//2)
 
         mainframe.columnconfigure(0,weight=1)
         mainframe.rowconfigure(0,weight=2)

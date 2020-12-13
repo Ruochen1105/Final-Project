@@ -79,8 +79,10 @@ class gui():
             self.display.insert("end",ctime+" [You]>>> ")
             for i in range(len(input)):
                 if input[i]=="[":
-                    if input[i+1]=="\\" and input[i+3]=="]":
+                    if input[i+1]=="\\" and input[i+3]=="]" and input[i+2].isnumeric():
                         self.display.image_create("end",image=self.edic[int(input[i+2])])
+                    else:
+                        self.display.insert("end","[")
                 elif input[i]=="\\" and input[i+1].isnumeric() and input[i+2]=="]" and input[i-1]=="[":
                     continue
                 elif input[i].isnumeric() and input[i+1]=="]" and input[i-1]=="\\" and input[i-2]=="[":
@@ -99,6 +101,8 @@ class gui():
                 if input[i]=="[":
                     if input[i+1]=="\\" and input[i+3]=="]":
                         self.display.image_create("end",image=self.edic[int(input[i+2])])
+                    else:
+                        self.display.insert("end","[")
                 elif input[i]=="\\" and input[i+1].isnumeric() and input[i+2]=="]" and input[i-1]=="[":
                     continue
                 elif input[i].isnumeric() and input[i+1]=="]" and input[i-1]=="\\" and input[i-2]=="[":
